@@ -16,11 +16,22 @@ class Home extends Component {
 
     render() {
         return (
-            this.state.items.map(item=>{
-                return(
-                    <div>{item.title}</div>
-                )
-            })
+                this.state.items.map(item=>{
+                    return(
+                        <div className="col s12 m6 l4 xl2" >
+                            <div className="card">
+                                <div className="center">
+                                    <img src="img/fantasy-bookcover.jpg" alt=""/>
+                                </div>
+                                <div className="card-content">
+                                    <span className="card-title">{item.title}</span>
+                                    <p>{item.desc}</p>
+                                    <p><b>Price: ${parseFloat(item.price / 100).toFixed(2)}</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })
         )
     }
 

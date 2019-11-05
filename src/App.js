@@ -9,7 +9,9 @@ function App() {
     <Fragment>
       <Navbar/>
       <div className="container">
-        <Home/>
+        <div className="row">
+          <Home/>
+        </div>
       </div>
     </Fragment>
   );
