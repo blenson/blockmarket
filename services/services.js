@@ -9,6 +9,13 @@ const items = require("./routes/items");
 require("dotenv").config();
 const PORT = process.env.SERVER_PORT || 4000;
 
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.DB_CONNECT_STRING, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
 app.use("/api/items", items);
 
 app.listen(PORT, function() {

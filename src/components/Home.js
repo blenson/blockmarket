@@ -19,7 +19,7 @@ class Home extends Component {
         return (
                 this.state.items.map(item=>{
                     return(
-                        <div className="col s12 m6 l4 xl2" >
+                        <div key={item._id} className="col s12 m6 l4 xl2" >
                             <div className="card">
                                 <div className="center">
                                     <img src="img/fantasy-bookcover.jpg" alt=""/>
@@ -27,7 +27,7 @@ class Home extends Component {
                                 <div className="card-content">
                                     <span className="card-title">{item.title}</span>
                                     <p>{item.desc}</p>
-                                    <p><b>Price: ${parseFloat(item.price / 100).toFixed(2)}</b></p>
+                                    <p><b>Price: ${item.price.toFixed(2)}</b></p>
                                 </div>
                             </div>
                         </div>
@@ -39,9 +39,8 @@ class Home extends Component {
     componentDidMount() {
         axios.get("http://localhost:4000/api/items")
         .then(res => {
-            const items = res.data;
-            console.log(items);
-            this.setState(res.data);
+            this.setState({"items": res.data});
+            console.log(res.data)
         })
     }
 }
