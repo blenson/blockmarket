@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors");
 app.use(cors());
 
-const items = require("./routes/items");
+const books = require("./routes/itemRoutes/bookRoute");
 
 require("dotenv").config();
 const PORT = process.env.SERVER_PORT || 4000;
@@ -16,7 +16,7 @@ mongoose.connect(process.env.DB_CONNECT_STRING, {
     useUnifiedTopology: true
 });
 
-app.use("/api/items", items);
+app.use("/api/books", books);
 
 app.listen(PORT, function() {
     console.log("Our server is running on port " + PORT);
