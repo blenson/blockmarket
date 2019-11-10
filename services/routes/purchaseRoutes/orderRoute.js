@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-const BookModel = require("../../models/Item/BookModel");
+const OrderModel = require("../../models/Purchase/OrderModel");
 
 // get all
 router.get('/', async (req, res) => {
     try {
-        var books = await BookModel.find({}).exec();
-        res.send(books);
+        var orders = await OrderModel.find({}).exec();
+        res.send(orders);
     } catch (error) {
         res.status(500).send(error);
     }
@@ -16,8 +16,8 @@ router.get('/', async (req, res) => {
 // get one
 router.get('/:id', async (req, res) => {
     try {
-        var book = await BookModel.findById(req.params.id).exec();
-        res.send(book);
+        var order = await OrderModel.findById(req.params.id).exec();
+        res.send(order);
     } catch (error) {
         res.status(500).send(error);
     }
@@ -26,8 +26,8 @@ router.get('/:id', async (req, res) => {
 // create new
 router.post("/", async (req, res) => {
     try {
-        var book = new BookModel(req.body);
-        var result = await book.save();
+        var order = new OrderModel(req.body);
+        var result = await order.save();
         res.send(result);
     } catch (error) {
         res.status(500).send(error);
@@ -37,9 +37,9 @@ router.post("/", async (req, res) => {
 // update existing
 router.put("/:id", async (req, res) => {
     try {
-        var book = await BookModel.findById(req.params.id).exec();
-        book.set(req.body);
-        var result = await book.save();
+        var order = await OrderModel.findById(req.params.id).exec();
+        order.set(req.body);
+        var result = await order.save();
         res.send(result);
     } catch (error) {
         res.status(500).send(error);
@@ -49,7 +49,7 @@ router.put("/:id", async (req, res) => {
 // delete one
 router.delete("/:id", async (req, res) => {
     try {
-        var result = await BookModel.deleteOne({ _id: req.params.id }).exec();
+        var result = await OrderModel.deleteOne({ _id: req.params.id }).exec();
         res.send(result);
     } catch (error) {
         res.status(500).send(error);

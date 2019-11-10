@@ -27,11 +27,11 @@ class Home extends Component {
                                 <div className="card-content">
                                     <span className="card-title">{item.title}</span>
                                     <p>{item.desc}</p>
-                                    <p><b>Price: ${item.price.toFixed(2)}</b></p>
+                                    <p><b>Price: ${parseFloat(item.price.$numberDecimal).toFixed(2)}</b></p>
                                 </div>
                             </div>
                         </div>
-                    )
+                    ) 
                 })
         )
     }
