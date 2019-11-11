@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
-//require("dotenv").config();
 const mongoose = require('mongoose');
 const cors = require("cors");
 
@@ -17,7 +16,7 @@ dotenv.config();
 
 app.use(cors());
 
-// we'll use bodyparser to send json data to our REST services
+// we'll use bodyparser to pull json data from our REST services
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

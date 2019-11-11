@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 import "material-design-icons/iconfont/material-icons.css";
 import axios from "axios";
 
-class Home extends Component {
+class PopularBooks extends Component {
     
     constructor() {
         super();
@@ -45,4 +44,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default PopularBooks;
