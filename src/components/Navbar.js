@@ -3,8 +3,6 @@ import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 import "material-design-icons/iconfont/material-icons.css";
 import { Link } from "react-router-dom";
-import Login from './Login';
-import Register from './Register';
 
 class Navbar extends Component {
     componentDidMount() {
@@ -22,15 +20,15 @@ class Navbar extends Component {
             <React.Fragment>
                 <nav className="nav-wrapper indigo" >
                     <div className="container">
-                        <a href="/#" className="brand-logo">BlockMarket</a>
-                        <a href="/#" className="sidenav-trigger hide-on-large-and-up" data-target="mobile-nav">
+                        <a href="/" className="brand-logo">BlockMarket</a>
+                        <a href="/" className="sidenav-trigger hide-on-large-and-up" data-target="mobile-nav">
                             <i className="material-icons">menu</i>
                         </a>
                         <ul className="right">
                             <li><Link to="/" className="hide-on-med-and-down">Shop</Link></li>
                             <li><Link to="/store"  className="hide-on-med-and-down">Store</Link></li>
-                            <li><Link to="/login" className="hide-on-med-and-down modal-trigger">Login</Link></li>
-                            <li><Link to="/register" className="hide-on-med-and-down modal-trigger">Register</Link></li>
+                            <li><Link to="/login" className="hide-on-med-and-down">Login</Link></li>
+                            <li><Link to="/register" className="hide-on-med-and-down">Register</Link></li>
                             <li>
                                 <Link to="/cart" className="btn-floating indigo darken-4 z-depth-0">
                                     <i className="material-icons">shopping_cart</i>
@@ -47,8 +45,6 @@ class Navbar extends Component {
                     <li><Link to="/login" className="modal-trigger">Login</Link></li>
                     <li><Link to="/register" className="modal-trigger">Register</Link></li>
                 </ul>
-                <Login/>
-                <Register/>
             </React.Fragment>
         )
     }
