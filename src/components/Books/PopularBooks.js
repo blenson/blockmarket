@@ -39,7 +39,6 @@ class PopularBooks extends Component {
         axios.get("http://localhost:4000/api/books")
         .then(res => {
             this.setState({"items": res.data});
-            console.log(res.data)
         })
     }
 }

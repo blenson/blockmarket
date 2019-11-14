@@ -11,6 +11,7 @@ const merchants = require("./routes/userRoutes/merchantRoute");
 const buyers = require("./routes/userRoutes/buyerRoute");
 const stores = require("./routes/storeRoutes/storeRoute");
 const orders = require("./routes/purchaseRoutes/orderRoute");
+const auth = require("./routes/authRoutes/authRoute");
 
 dotenv.config();
 
@@ -32,6 +33,7 @@ app.use("/api/merchants", merchants);
 app.use("/api/buyers", buyers);
 app.use("/api/stores", stores);
 app.use("/api/orders", orders);
+app.use("/api/auth", auth);
 
 // kick off our server
 const PORT = process.env.SERVER_PORT || 4000;
