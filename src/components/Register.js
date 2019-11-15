@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Redirect} from 'react-router-dom'
 import "materialize-css/dist/css/materialize.min.css";
 import "material-design-icons/iconfont/material-icons.css";
 import { Button, TextInput, Row, Col } from "react-materialize";
@@ -14,7 +15,8 @@ class Register extends Component {
             password2: "",
             email: "",
             displayMessage: "",
-            hasError: false
+            hasError: false,
+            registered: false
         };
     }
 
@@ -27,8 +29,8 @@ class Register extends Component {
         };
 
         try {
-            await axios.post("http://localhost:4000/api/auth/register", regData);
-            this.setState({ displayMessage: "Success: User Registered", hasError: false });
+            await axios.post(process.env.REACT_APP_ServiceURL + "/api/auth/register", regData);
+            this.setState({registered: true});
         } catch (error) {
             this.setState({ displayMessage: error.response.data.msg, hasError: true });
         }
@@ -39,6 +41,10 @@ class Register extends Component {
     }
 
     render() {
+        if (this.state.registered === true) {
+            return <Redirect to='/login' />;
+        }
+
         const messageColor = this.state.hasError ? "red" : "black";
 
         return (

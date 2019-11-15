@@ -8,7 +8,8 @@ const AuthModel = BaseAuthModel.discriminator(
         "username": String,
         "password": String,
         "password2": String,
-        "email": String
+        "email": String,
+        "role": Number
     })
 );
 

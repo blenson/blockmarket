@@ -1,7 +1,7 @@
 import React from 'react';
 import PopularBooks from './Books/PopularBooks';
 
-const Shop = () => {
+const Shop = ({servicePath}) => {
     return(
         <div className="container">
             <div className="row">
