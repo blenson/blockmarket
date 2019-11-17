@@ -6,6 +6,8 @@ const BookModel = require("../../models/Item/BookModel");
 // get all
 router.get('/', async (req, res) => {
     try {
+        console.log('Req: ' + req.me);
+        console.log('Res: ' + res);
         var books = await BookModel.find({}).exec();
         res.send(books);
     } catch (error) {

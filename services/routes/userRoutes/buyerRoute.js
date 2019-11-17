@@ -1,10 +1,13 @@
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
 
 const BuyerModel = require("../../models/User/BuyerModel");
 
 // get all
 router.get('/', async (req, res) => {
+    console.log('Req: ' + req);
+    console.log('Res: ' + res);
     try {
         var buyers = await BuyerModel.find({}).exec();
         res.send(buyers);

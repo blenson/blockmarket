@@ -15,7 +15,7 @@ class PopularBooks extends Component {
     }
 
     render() {
-        if (this.state.authorized === false) {
+        if (this.state.authorized === false) { 
             return <Redirect to='/login' />;
         }
         return this.state.items.map(item => {
