@@ -45,11 +45,13 @@ class PopularBooks extends Component {
         };
 
         axios
-            .get(process.env.REACT_APP_ServiceURL + "/api/books", config)
+            .get(process.env.REACT_APP_ServiceURL + "/api/books/limit/9", config)
             .then(response => {
                 this.setState({ items: response.data });
             })
             .catch(error => {
+                console.log(error);
+                this.props.setLoginState(false);
                 this.setState({ authorized: false });
             });
     }

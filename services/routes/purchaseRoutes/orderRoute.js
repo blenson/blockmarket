@@ -4,20 +4,36 @@ const router = express.Router();
 const OrderModel = require("../../models/Purchase/OrderModel");
 
 // get all
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
     try {
-        var orders = await OrderModel.find({}).exec();
-        res.send(orders);
+        if (req.auth.admin !== 0) {
+            var orders = await OrderModel.find({}).exec();
+            res.send(orders);
+        } else if (req.auth.isMerchant === true) {
+            var orders = await OrderModel.find({ merchantId: req.auth.userid }).exec();
+            res.send(orders);
+        } else {
+            var orders = await OrderModel.find({ buyerId: req.auth.userid }).exec();
+            res.send(orders);
+        }
     } catch (error) {
         res.status(500).send(error);
     }
 });
 
 // get one
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
         var order = await OrderModel.findById(req.params.id).exec();
-        res.send(order);
+        if (req.auth.admin !== 0) {
+            res.send(order);
+        } else if (req.auth.isMerchant === true && order.merchantId === req.auth.userid) {
+            res.send(orders);
+        } else if (req.auth.isMerchant !== true && order.buyerId === req.auth.userid) {
+            res.send(orders);
+        } else {
+            res.status(401).send("Not authorised");
+        }
     } catch (error) {
         res.status(500).send(error);
     }
@@ -27,8 +43,18 @@ router.get('/:id', async (req, res) => {
 router.post("/", async (req, res) => {
     try {
         var order = new OrderModel(req.body);
-        var result = await order.save();
-        res.send(result);
+        if (req.auth.admin !== 0) {
+            var result = await order.save();
+            res.send(result);
+        } else if (req.auth.isMerchant === true && order.merchantId === req.auth.userid) {
+            var result = await order.save();
+            res.send(result);
+        } else if (req.auth.isMerchant !== true && order.buyerId === req.auth.userid) {
+            var result = await order.save();
+            res.send(result);
+        } else {
+            res.status(401).send("Not authorised");
+        }
     } catch (error) {
         res.status(500).send(error);
     }
@@ -39,8 +65,18 @@ router.put("/:id", async (req, res) => {
     try {
         var order = await OrderModel.findById(req.params.id).exec();
         order.set(req.body);
-        var result = await order.save();
-        res.send(result);
+        if (req.auth.admin !== 0) {
+            var result = await order.save();
+            res.send(result);
+        } else if (req.auth.isMerchant === true && order.merchantId === req.auth.userid) {
+            var result = await order.save();
+            res.send(result);
+        } else if (req.auth.isMerchant !== true && order.buyerId === req.auth.userid) {
+            var result = await order.save();
+            res.send(result);
+        } else {
+            res.status(401).send("Not authorised");
+        }
     } catch (error) {
         res.status(500).send(error);
     }
@@ -49,6 +85,10 @@ router.put("/:id", async (req, res) => {
 // delete one
 router.delete("/:id", async (req, res) => {
     try {
+        if (req.auth.admin === 0) {
+            res.status(401).send("Not authorised");
+            return;
+        }
         var result = await OrderModel.deleteOne({ _id: req.params.id }).exec();
         res.send(result);
     } catch (error) {

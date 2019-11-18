@@ -31,7 +31,7 @@ class App extends Component {
                 <Navbar loggedIn={this.state.loggedIn}/>
                 <Switch>
                     <Route exact path='/'>
-                        <Shop />
+                        <Shop setLoginState={this.setLoginState} />
                     </Route>
                     <Route path='/store'>
                         <Store />

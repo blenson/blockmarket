@@ -96,6 +96,8 @@ router.post("/register", async (req, res) => {
         let persistedAuthInfo = new AuthModel({
             username: userReg.username,
             email: userReg.email,
+            isMerchant: userReg.isMerchant,
+            userid: userReg.userid,
             role: 0
         });
 

@@ -45,11 +45,11 @@ app.use(passport.initialize());
 require("./secure/jwtCheck")(passport);
 
 // use our routes
-app.use("/api/books", passport.authenticate("jwt", { session: false }), books);
+app.use("/api/books", books);
 app.use("/api/merchants", merchants);
 app.use("/api/buyers", buyers);
-app.use("/api/stores", stores);
-app.use("/api/orders", orders);
+app.use("/api/stores", passport.authenticate("jwt", { session: false }), stores);
+app.use("/api/orders", passport.authenticate("jwt", { session: false }), orders);
 app.use("/api/auth", auth);
 
 const httpsOptions = {

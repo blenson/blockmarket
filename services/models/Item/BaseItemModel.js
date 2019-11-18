@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
 const BaseItemSchema = new mongoose.Schema({
+    "merchantId": String,
+    "storeId": String,
     "name": String,
     "desc": String,
     "price": mongoose.Types.Decimal128,

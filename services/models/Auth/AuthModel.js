@@ -9,6 +9,8 @@ const AuthModel = BaseAuthModel.discriminator(
         "password": String,
         "password2": String,
         "email": String,
+        "isMerchant": Boolean,
+        "userid" : String,
         "role": Number
     })
 );

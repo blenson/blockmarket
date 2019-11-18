@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import {Redirect} from 'react-router-dom'
+import { Redirect } from "react-router-dom";
 import "materialize-css/dist/css/materialize.min.css";
 import "material-design-icons/iconfont/material-icons.css";
-import { Button, TextInput, Row, Col } from "react-materialize";
+import { Button, TextInput, Row, Col, Switch } from "react-materialize";
 import axios from "axios";
+import AuthDTO from "../dto/AuthDTO";
+import MerchantDTO from "../dto/MerchantDTO";
+import BuyerDTO from "../dto/BuyerDTO";
 
 class Register extends Component {
     constructor(props) {
@@ -14,6 +17,7 @@ class Register extends Component {
             password: "",
             password2: "",
             email: "",
+            isMerchant: false,
             displayMessage: "",
             hasError: false,
             registered: false
@@ -21,16 +25,33 @@ class Register extends Component {
     }
 
     registerUser = async e => {
-        const regData = {
-            username: this.state.username,
-            password: this.state.password,
-            password2: this.state.password2,
-            email: this.state.email
-        };
+        const regData = new AuthDTO();
+        regData.username = this.state.username;
+        regData.password = this.state.password;
+        regData.password2 = this.state.password;
+        regData.email = this.state.email;
+        regData.isMerchant = this.state.isMerchant;
 
         try {
-            await axios.post(process.env.REACT_APP_ServiceURL + "/api/auth/register", regData);
-            this.setState({registered: true});
+            if (this.state.isMerchant) {
+                const merchantData = new MerchantDTO();
+                merchantData.username = this.state.username;
+                merchantData.email = this.state.email;
+                const user = await axios.post(process.env.REACT_APP_ServiceURL + "/api/merchants", merchantData);
+
+                regData.userid = user.data._id;
+                await axios.post(process.env.REACT_APP_ServiceURL + "/api/auth/register", regData);
+            } else {
+                const buyerData = new BuyerDTO();
+                buyerData.username = this.state.username;
+                buyerData.email = this.state.email;
+                const user = await axios.post(process.env.REACT_APP_ServiceURL + "/api/buyers", buyerData);
+
+                regData.userid = user.data._id;
+                await axios.post(process.env.REACT_APP_ServiceURL + "/api/auth/register", regData);
+            }
+
+            this.setState({ registered: true });
         } catch (error) {
             this.setState({ displayMessage: error.response.data.msg, hasError: true });
         }
@@ -89,6 +110,14 @@ class Register extends Component {
                             value={this.state.email}
                             onChange={e => this.handleChange(e)}
                         />
+                        <div>
+                            Are you a merchant and want to sell your goods?
+                            <Switch
+                                offLabel='No'
+                                onLabel='Yes'
+                                onChange={() => this.setState({ isMerchant: !this.state.isMerchant })}
+                            />
+                        </div>
                         <div style={{ marginTop: 15, color: messageColor }}>
                             <h5>{this.state.displayMessage}</h5>
                         </div>

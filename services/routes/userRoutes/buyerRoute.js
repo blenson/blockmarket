@@ -5,10 +5,12 @@ const passport = require("passport");
 const BuyerModel = require("../../models/User/BuyerModel");
 
 // get all
-router.get('/', async (req, res) => {
-    console.log('Req: ' + req);
-    console.log('Res: ' + res);
+router.get('/', passport.authenticate("jwt", { session: false }), async (req, res) => {
     try {
+        if (req.auth.admin === 0) {
+            res.status(401).send("Not authorised");
+            return;
+        }
         var buyers = await BuyerModel.find({}).exec();
         res.send(buyers);
     } catch (error) {
@@ -17,8 +19,12 @@ router.get('/', async (req, res) => {
 });
 
 // get one
-router.get('/:id', async (req, res) => {
+router.get('/:id', passport.authenticate("jwt", { session: false }), async (req, res) => {
     try {
+        if (req.params.id !== req.auth.userid && req.auth.role === 0) {
+            res.status(401).send("Not authorised");
+            return;
+        }
         var buyer = await BuyerModel.findById(req.params.id).exec();
         res.send(buyer);
     } catch (error) {
@@ -38,8 +44,12 @@ router.post("/", async (req, res) => {
 });
 
 // update existing
-router.put("/:id", async (req, res) => {
+router.put("/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
     try {
+        if (req.params.id !== req.auth.userid && req.auth.role === 0) {
+            res.status(401).send("Not authorised");
+            return;
+        }
         var buyer = await BuyerModel.findById(req.params.id).exec();
         buyer.set(req.body);
         var result = await buyer.save();
@@ -50,8 +60,12 @@ router.put("/:id", async (req, res) => {
 });
 
 // delete one
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
     try {
+        if (req.params.id !== req.auth.userid && req.auth.role === 0) {
+            res.status(401).send("Not authorised");
+            return;
+        }
         var result = await BuyerModel.deleteOne({ _id: req.params.id }).exec();
         res.send(result);
     } catch (error) {

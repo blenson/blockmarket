@@ -1,11 +1,11 @@
 import React from 'react';
 import PopularBooks from './Books/PopularBooks';
 
-const Shop = ({servicePath}) => {
+const Shop = (props) => {
     return(
         <div className="container">
             <div className="row">
-                <PopularBooks/>
+                <PopularBooks setLoginState = {props.setLoginState} />
             </div>
         </div>
     )
