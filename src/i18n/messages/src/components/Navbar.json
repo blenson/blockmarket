@@ -1,0 +1,22 @@
+[
+  {
+    "id": "nav.Shop",
+    "defaultMessage": "Shop"
+  },
+  {
+    "id": "nav.Store",
+    "defaultMessage": "Store"
+  },
+  {
+    "id": "nav.Logout",
+    "defaultMessage": "Logout"
+  },
+  {
+    "id": "nav.Login",
+    "defaultMessage": "Login"
+  },
+  {
+    "id": "nav.Register",
+    "defaultMessage": "Register"
+  }
+]

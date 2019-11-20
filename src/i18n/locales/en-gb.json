@@ -1,0 +1,23 @@
+{
+    "books.price": "Price:",
+    "general.no": "No",
+    "general.yes": "Yes",
+    "login.login": "Login",
+    "login.loginTitle": "User Login",
+    "login.password": "Password",
+    "login.rememberMe": "Remember me",
+    "login.username": "Username",
+    "nav.Login": "Login",
+    "nav.Logout": "Logout",
+    "nav.Register": "Register",
+    "nav.Shop": "Shop",
+    "nav.Store": "Store",
+    "register.badEmailAddress": "Missing or invalid email",
+    "register.confirm": "Confirm",
+    "register.email": "Email",
+    "register.mechantSelling": "Are you a merchant and want to sell your goods?",
+    "register.password": "Password",
+    "register.register": "Register",
+    "register.registerTitle": "Register New User",
+    "register.username": "Username"
+}

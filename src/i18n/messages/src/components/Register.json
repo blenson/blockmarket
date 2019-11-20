@@ -1,0 +1,10 @@
+[
+  {
+    "id": "register.registerTitle",
+    "defaultMessage": "Register New User"
+  },
+  {
+    "id": "register.register",
+    "defaultMessage": "Register"
+  }
+]

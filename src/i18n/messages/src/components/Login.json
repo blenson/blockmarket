@@ -1,0 +1,22 @@
+[
+  {
+    "id": "login.loginTitle",
+    "defaultMessage": "User Login"
+  },
+  {
+    "id": "login.username",
+    "defaultMessage": "Username"
+  },
+  {
+    "id": "login.password",
+    "defaultMessage": "Password"
+  },
+  {
+    "id": "login.rememberMe",
+    "defaultMessage": "Remember me"
+  },
+  {
+    "id": "login.login",
+    "defaultMessage": "Login"
+  }
+]

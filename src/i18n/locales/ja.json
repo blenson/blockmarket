@@ -1,0 +1,23 @@
+{
+    "books.price": "価格：",
+    "general.no": "ノー",
+    "general.yes": "はい",
+    "login.login": "ログインする",
+    "login.loginTitle": "ユーザーログイン",
+    "login.password": "パスワード",
+    "login.rememberMe": "このデバイスで私を覚えている",
+    "login.username": "ユーザー名",
+    "nav.Login": "ログインする",
+    "nav.Logout": "ログアウト",
+    "nav.Register": "登録",
+    "nav.Shop": "購入",
+    "nav.Store": "店舗",
+    "register.badEmailAddress": "メールが見つからないか無効です",
+    "register.confirm": "ベリファイ",
+    "register.email": "電子メールアドレス",
+    "register.mechantSelling": "あなたは商人で、あなたの商品を売りたいですか？",
+    "register.password": "パスワード",
+    "register.register": "登録",
+    "register.registerTitle": "新規ユーザー登録",
+    "register.username": "ユーザー名"
+}

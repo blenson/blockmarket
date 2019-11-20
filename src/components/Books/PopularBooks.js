@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import {Redirect} from 'react-router-dom'
+import { Redirect } from "react-router-dom";
 import "materialize-css/dist/css/materialize.min.css";
 import "material-design-icons/iconfont/material-icons.css";
 import axios from "axios";
+import { FormattedMessage, FormattedNumber } from "react-intl";
+
+let cultureInfo = require("../../i18n/util/cultures.json");
 
 class PopularBooks extends Component {
     constructor(props) {
@@ -15,9 +18,10 @@ class PopularBooks extends Component {
     }
 
     render() {
-        if (this.state.authorized === false) { 
+        if (this.state.authorized === false) {
             return <Redirect to='/login' />;
         }
+        let currencyFactor = this.props.locale === 'ja' ? 100 : 1;
         return this.state.items.map(item => {
             return (
                 <div key={item._id} className='col s12 m6 l4 xl2'>
@@ -29,9 +33,11 @@ class PopularBooks extends Component {
                             <span className='card-title'>{item.title}</span>
                             <p>{item.desc}</p>
                             <p>
-                                <b>Price: ${parseFloat(item.price.$numberDecimal).toFixed(2)}</b>
+                                <b>
+                                    <FormattedMessage id='books.price' defaultMessage='Price:' />{" "}<FormattedNumber value={parseFloat(item.price.$numberDecimal).toFixed(2)*currencyFactor} style={`currency`} currency={cultureInfo[this.props.locale].currency}/>
+                                </b>
                             </p>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             );
@@ -41,7 +47,7 @@ class PopularBooks extends Component {
     componentDidMount() {
         var config = {
             withCredentials: true,
-            credentials: 'same-origin'
+            credentials: "same-origin"
         };
 
         axios

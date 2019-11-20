@@ -1,0 +1,9 @@
+{
+    "en": { "currency": "USD" },
+    "es": { "currency": "EUR" },
+    "engb": { "currency": "GBP" },
+    "fr": { "currency": "EUR" },
+    "de": { "currency": "EUR" },
+    "ja": { "currency": "JPY" }
+}
+

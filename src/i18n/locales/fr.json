@@ -1,0 +1,23 @@
+{
+    "books.price": "Prix:",
+    "general.no": "Non",
+    "general.yes": "Oui",
+    "login.login": "S'identifier",
+    "login.loginTitle": "Utilisateur en Ligne",
+    "login.password": "Mot de passe",
+    "login.rememberMe": "Se souvenir de moi sur cet ordinateur",
+    "login.username": "Nom d'utilisateur",
+    "nav.Login": "S'identifier",
+    "nav.Logout": "Se déconnecter",
+    "nav.Register": "S'inscrire",
+    "nav.Shop": "Achat",
+    "nav.Store": "Magasin",
+    "register.badEmailAddress": "Email manquant ou invalide",
+    "register.confirm": "Vérifier",
+    "register.email": "Email",
+    "register.mechantSelling": "Êtes-vous un commerçant et souhaitez-vous vendre vos produits?",
+    "register.password": "Mot de passe",
+    "register.register": "S'inscrire",
+    "register.registerTitle": "Enregistrer un Nouvel Utilisateur",
+    "register.username": "Nom d'utilisateur"
+}

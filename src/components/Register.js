@@ -4,6 +4,9 @@ import "materialize-css/dist/css/materialize.min.css";
 import "material-design-icons/iconfont/material-icons.css";
 import { Button, TextInput, Row, Col, Switch } from "react-materialize";
 import axios from "axios";
+import { FormattedMessage } from "react-intl";
+import { translate } from "../i18n/util/translate";
+
 import AuthDTO from "../dto/AuthDTO";
 import MerchantDTO from "../dto/MerchantDTO";
 import BuyerDTO from "../dto/BuyerDTO";
@@ -70,13 +73,13 @@ class Register extends Component {
 
         return (
             <div className='container center' color='indigo' style={{ marginTop: 75 }}>
-                <h4>Register New User</h4>
+                <h4>{<FormattedMessage id='register.registerTitle' defaultMessage='Register New User' />}</h4>
                 <Row style={{ marginTop: 25 }}>
                     <Col s={12} m={8} l={8} xl={6} offset='m2 l2 xl3'>
                         <TextInput
                             icon='person'
                             noLayout={true}
-                            label='Username'
+                            label={translate(this.props.locale, "register.username")}
                             name='username'
                             value={this.state.username}
                             onChange={e => this.handleChange(e)}
@@ -85,7 +88,7 @@ class Register extends Component {
                             icon='lock'
                             noLayout={true}
                             password
-                            label='Password'
+                            label={translate(this.props.locale, "register.password")}
                             name='password'
                             value={this.state.password}
                             onChange={e => this.handleChange(e)}
@@ -94,27 +97,27 @@ class Register extends Component {
                             icon='lock'
                             noLayout={true}
                             password
-                            label='Confirm'
+                            label={translate(this.props.locale, "register.confirm")}
                             name='password2'
                             value={this.state.password2}
                             onChange={e => this.handleChange(e)}
                         />
                         <TextInput
                             icon='email'
+                            name='email'
                             noLayout={true}
                             email
                             validate
-                            error='Missing or invalid email'
-                            label='Email'
-                            name='email'
                             value={this.state.email}
                             onChange={e => this.handleChange(e)}
+                            error={translate(this.props.locale, "register.badEmailAddress")}
+                            label={translate(this.props.locale, "register.email")}
                         />
                         <div>
-                            Are you a merchant and want to sell your goods?
+                            {translate(this.props.locale, "register.mechantSelling")}
                             <Switch
-                                offLabel='No'
-                                onLabel='Yes'
+                                offLabel={translate(this.props.locale, "general.no")}
+                                onLabel={translate(this.props.locale, "general.yes")}
                                 onChange={() => this.setState({ isMerchant: !this.state.isMerchant })}
                             />
                         </div>
@@ -124,7 +127,7 @@ class Register extends Component {
 
                         <div style={{ marginTop: 25 }}>
                             <Button className='indigo' onClick={e => this.registerUser(e)}>
-                                Register
+                                <FormattedMessage id='register.register' defaultMessage='Register' />
                             </Button>
                         </div>
                     </Col>
