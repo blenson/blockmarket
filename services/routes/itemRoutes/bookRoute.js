@@ -5,9 +5,12 @@ const passport = require("passport");
 const BookModel = require("../../models/Item/BookModel");
 
 // get first 'num' books
-router.get('/limit/:num', async (req, res) => {
+router.get("/limit/:num", async (req, res) => {
     try {
-        var books = await BookModel.find({}).limit(Number(req.params.num)).exec();
+        var books = await BookModel.find({})
+            .sort({ name: 1 })
+            .limit(Number(req.params.num))
+            .exec();
         res.send(books);
     } catch (error) {
         res.status(500).send(error);
@@ -17,7 +20,7 @@ router.get('/limit/:num', async (req, res) => {
 // Return the number of documents in the collection.
 // We may want to change the countDocuments to estimatedCount later
 // if the number of books becmoes huge and performance takes a hit.
-router.get('/count', async (req, res) => {
+router.get("/count", async (req, res) => {
     try {
         var count = await BookModel.countDocuments({}).exec();
         res.send({ count: count });
@@ -27,7 +30,7 @@ router.get('/count', async (req, res) => {
 });
 
 // get one
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
         var book = await BookModel.findById(req.params.id).exec();
         res.send(book);

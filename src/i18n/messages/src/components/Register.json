@@ -1,10 +1,42 @@
 [
-  {
-    "id": "register.registerTitle",
-    "defaultMessage": "Register New User"
-  },
-  {
-    "id": "register.register",
-    "defaultMessage": "Register"
-  }
+    {
+        "id": "general.yes",
+        "defaultMessage": "Yes"
+    },
+    {
+        "id": "general.no",
+        "defaultMessage": "No"
+    },
+    {
+        "id": "register.registerTitle",
+        "defaultMessage": "Register New User"
+    },
+    {
+        "id": "register.confirm",
+        "defaultMessage": "Confirm"
+    },
+    {
+        "id": "register.username",
+        "defaultMessage": "Username"
+    },
+    {
+        "id": "register.password",
+        "defaultMessage": "Password"
+    },
+    {
+        "id": "register.register",
+        "defaultMessage": "Register"
+    },
+    {
+        "id": "register.badEmailAddress",
+        "defaultMessage": "Missing or invalid email"
+    },
+    {
+        "id": "register.email",
+        "defaultMessage": "Email"
+    },
+    {
+        "id": "register.mechantSelling",
+        "defaultMessage": "Are you a merchant and want to sell your goods?"
+    }
 ]

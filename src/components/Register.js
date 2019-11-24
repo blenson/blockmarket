@@ -6,6 +6,7 @@ import { Button, TextInput, Row, Col, Switch } from "react-materialize";
 import axios from "axios";
 import { FormattedMessage } from "react-intl";
 import { translate } from "../i18n/util/translate";
+import { connect } from "react-redux";
 
 import AuthDTO from "../dto/AuthDTO";
 import MerchantDTO from "../dto/MerchantDTO";
@@ -137,4 +138,10 @@ class Register extends Component {
     }
 }
 
-export default Register;
+const mapStateToProps = state => {
+    return {
+        locale: state.app.locale
+    };
+};
+
+export default connect(mapStateToProps)(Register);

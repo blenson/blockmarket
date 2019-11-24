@@ -1,16 +1,18 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const BaseItemSchema = new mongoose.Schema({
-    "merchantId": String,
-    "storeId": String,
-    "name": String,
-    "desc": String,
-    "price": mongoose.Types.Decimal128,
-    "image" : {
-        "smallUrl" : String,
-        "largeUrl" : String
-    }
+    merchantId: String,
+    storeId: String,
+    name: String,
+    desc: String,
+    price: mongoose.Types.Decimal128,
+    image: {
+        smallUrl: String,
+        largeUrl: String
+    },
+    rating: Number,
+    numRatings: Number
 });
-const BaseItemModel = mongoose.model( "BaseItem", BaseItemSchema, "items" );
+const BaseItemModel = mongoose.model("BaseItem", BaseItemSchema, "items");
 
-module.exports = BaseItemModel
+module.exports = BaseItemModel;

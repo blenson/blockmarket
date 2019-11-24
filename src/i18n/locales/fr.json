@@ -1,5 +1,5 @@
 {
-    "books.price": "Prix:",
+    "books.popular": "Livres populaires",
     "general.no": "Non",
     "general.yes": "Oui",
     "login.login": "S'identifier",
@@ -13,7 +13,7 @@
     "nav.Shop": "Achat",
     "nav.Store": "Magasin",
     "register.badEmailAddress": "Email manquant ou invalide",
-    "register.confirm": "Vérifier",
+    "register.confirm": "Confirmer",
     "register.email": "Email",
     "register.mechantSelling": "Êtes-vous un commerçant et souhaitez-vous vendre vos produits?",
     "register.password": "Mot de passe",

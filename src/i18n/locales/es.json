@@ -1,7 +1,7 @@
 {
-    "books.price": "Precio:",
+    "books.popular": "Libros Populares",
     "general.no": "No",
-    "general.yes": "Si",
+    "general.yes": "Sí",
     "login.login": "Iniciar Sesión",
     "login.loginTitle": "Inicio de Sesión de Usuario",
     "login.password": "Contraseña",

@@ -1,5 +1,5 @@
 {
-    "books.price": "Preis:",
+    "books.popular": "Populäre Bücher",
     "general.no": "Nein",
     "general.yes": "Ja",
     "login.login": "Einloggen",
@@ -15,7 +15,7 @@
     "register.badEmailAddress": "Fehlende oder ungültige E-Mail",
     "register.confirm": "Bestätigen",
     "register.email": "Email",
-    "register.mechantSelling": "Sie sind Kaufmann und möchten Ihre Waren verkaufen?",
+    "register.mechantSelling": "Sind Sie Kaufmann und möchten Ihre Waren verkaufen?",
     "register.password": "Passwort",
     "register.register": "Registrieren",
     "register.registerTitle": "Neuen Benutzer registrieren",

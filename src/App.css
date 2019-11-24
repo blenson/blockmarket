@@ -25,3 +25,23 @@
     font-weight: bold;
     text-decoration: underline;
 }
+
+.notification-badge {
+    position:relative;
+    padding:3px 7px;
+    background-color: #fff;
+    color: #000;
+    bottom: 15px;
+    left: -25px;
+    border-radius: 50%;
+    z-index: 100;
+}
+
+.nav-wrapper {
+    margin-bottom: 5px;
+}
+
+.flags {
+    position: relative;
+    top: -5px !important;
+}

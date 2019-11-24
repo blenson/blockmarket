@@ -1,13 +1,17 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Redirect } from "react-router-dom";
 import "materialize-css/dist/css/materialize.min.css";
 import "material-design-icons/iconfont/material-icons.css";
 import axios from "axios";
-import { FormattedMessage, FormattedNumber } from "react-intl";
-
-let cultureInfo = require("../../i18n/util/cultures.json");
+import BookCard from "./BookCard";
+import { FormattedMessage } from "react-intl";
+import { connect } from "react-redux";
+import { setLoginState } from "../../util/session"
+import { setLoggedInStatus } from "../../redux/actions";
 
 class PopularBooks extends Component {
+    _isMounted = false;
+
     constructor(props) {
         super(props);
 
@@ -21,30 +25,28 @@ class PopularBooks extends Component {
         if (this.state.authorized === false) {
             return <Redirect to='/login' />;
         }
-        let currencyFactor = this.props.locale === 'ja' ? 100 : 1;
-        return this.state.items.map(item => {
+
+        let itemsDisplay = this.state.items.map(item => {
             return (
-                <div key={item._id} className='col s12 m6 l4 xl2'>
-                    <div className='card'>
-                        <div className='center'>
-                            <img src='img/fantasy-bookcover.jpg' alt='' />
-                        </div>
-                        <div className='card-content'>
-                            <span className='card-title'>{item.title}</span>
-                            <p>{item.desc}</p>
-                            <p>
-                                <b>
-                                    <FormattedMessage id='books.price' defaultMessage='Price:' />{" "}<FormattedNumber value={parseFloat(item.price.$numberDecimal).toFixed(2)*currencyFactor} style={`currency`} currency={cultureInfo[this.props.locale].currency}/>
-                                </b>
-                            </p>
-                        </div>
-                    </div>
+                <div key={item._id} className='col s12 m12 l6 xl4'>
+                    <BookCard item={item} />
                 </div>
             );
         });
+
+        return (
+            <Fragment>
+                <h4>
+                    <FormattedMessage id='books.popular' defaultMessage='Popular Books' />
+                </h4>
+                {itemsDisplay}
+            </Fragment>
+        );
     }
 
     componentDidMount() {
+        this._isMounted = true;
+
         var config = {
             withCredentials: true,
             credentials: "same-origin"
@@ -53,14 +55,34 @@ class PopularBooks extends Component {
         axios
             .get(process.env.REACT_APP_ServiceURL + "/api/books/limit/9", config)
             .then(response => {
-                this.setState({ items: response.data });
+                if (this._isMounted) {
+                    this.setState({ items: response.data });
+                }
             })
             .catch(error => {
                 console.log(error);
-                this.props.setLoginState(false);
-                this.setState({ authorized: false });
+                if (this._isMounted) {
+                    setLoginState(false, this.props.setLoggedInState);
+                    this.setState({ authorized: false });
+                }
             });
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 }
 
-export default PopularBooks;
+const mapStateToProps = state => {
+    return {
+        locale: state.app.locale
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setLoggedInStatus: (status) => dispatch(setLoggedInStatus(status))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PopularBooks);

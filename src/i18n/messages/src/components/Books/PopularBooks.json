@@ -1,6 +1,6 @@
 [
   {
-    "id": "books.price",
-    "defaultMessage": "Price:"
+    "id": "books.popular",
+    "defaultMessage": "Popular Books"
   }
 ]

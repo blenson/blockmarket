@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { IntlProvider } from "react-intl";
+import { connect } from "react-redux";
+import { setLocale, setLoggedInStatus } from "./redux/actions";
+
 import locales from "./i18n/locales";
 
 import Navbar from "./components/Navbar";
@@ -13,57 +16,35 @@ import Logout from "./components/Logout";
 import Cart from "./components/Cart";
 
 class App extends Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            loggedIn: JSON.parse(localStorage.getItem("HVSLoggedIn") || "false"),
-            locale: localStorage.getItem("HVSLocale") == null ? "en" : localStorage.getItem("HVSLocale") 
-        };
-        this.setLoginState = this.setLoginState.bind(this);
-        this.setLocale = this.setLocale.bind(this);
-    }
-
-    setLoginState(isLoggedIn) {
-        localStorage.setItem("HVSLoggedIn", isLoggedIn.toString());
-        this.setState({ loggedIn: isLoggedIn });
-    }
-
-    setLocale(locale) {
-        localStorage.setItem("HVSLocale", locale);
-        this.setState({ locale: locale });
-    }
-
-    expandLocaleName(locale) {
-        if (locale === 'engb') {
-            return 'en-gb';
-        }
-        return locale;
+    componentDidMount() {
+        this.props.setLocale(localStorage.getItem("HVSLocale") == null ? "en" : localStorage.getItem("HVSLocale"));
+        this.props.setLoggedInStatus(JSON.parse(localStorage.getItem("HVSLoggedIn") || "false"));
     }
 
     render() {
-        let messages = locales[`${this.state.locale}`];
-        let locale = this.state.locale;
-
+        let locale = this.props.locale;
+        let messages = locales[`${locale}`];
+        
         return (
-            <IntlProvider locale={this.expandLocaleName(locale)} defaultLocale={locale} key={locale} messages={messages}>
+            <IntlProvider locale={locale === "engb" ? "en-gb" : locale} defaultLocale={locale} key={locale} messages={messages}>
                 <Router>
-                    <Navbar loggedIn={this.state.loggedIn} setLocale={this.setLocale} locale={this.state.locale}/>
+                    <Navbar />
                     <Switch>
                         <Route exact path='/'>
-                            <Shop setLoginState={this.setLoginState} locale={locale} />
+                            <Shop />
                         </Route>
                         <Route path='/store'>
                             <Store />
                         </Route>
                         <Route path='/logout'>
-                            <Logout setLoginState={this.setLoginState} loggedIn={this.state.loggedIn} />
+                            <Logout />
                         </Route>
                         <Route path='/login'>
-                            <Login setLoginState={this.setLoginState} loggedIn={this.state.loggedIn} />
+                            <Login />
                         </Route>
                         <Route path='/register'>
-                            <Register locale={this.state.locale}/>
+                            <Register />
                         </Route>
                         <Route path='/cart'>
                             <Cart />
@@ -75,4 +56,17 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapStateToProps = state => {
+    return {
+        locale: state.app.locale
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setLocale: (locale) => dispatch(setLocale(locale)),
+        setLoggedInStatus: (status) => dispatch(setLoggedInStatus(status))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

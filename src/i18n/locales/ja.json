@@ -1,5 +1,5 @@
 {
-    "books.price": "価格：",
+    "books.popular": "人気の本",
     "general.no": "ノー",
     "general.yes": "はい",
     "login.login": "ログインする",
@@ -13,8 +13,8 @@
     "nav.Shop": "購入",
     "nav.Store": "店舗",
     "register.badEmailAddress": "メールが見つからないか無効です",
-    "register.confirm": "ベリファイ",
-    "register.email": "電子メールアドレス",
+    "register.confirm": "確認する",
+    "register.email": "Eメール",
     "register.mechantSelling": "あなたは商人で、あなたの商品を売りたいですか？",
     "register.password": "パスワード",
     "register.register": "登録",

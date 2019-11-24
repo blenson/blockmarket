@@ -22,14 +22,17 @@ dotenv.config();
 app.use(cookieParser());
 
 let corsOptions = {
-    "origin": "https://localhost:3000",
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-    "preflightContinue": false,
-    "credentials": true,
-    "optionsSuccessStatus": 204
-  }
+    origin: "https://localhost:3000",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    credentials: true,
+    optionsSuccessStatus: 204
+};
 
 app.use(cors(corsOptions));
+
+// open up the /images folder for static resources
+app.use("/images", express.static(__dirname + "/images"));
 
 // we'll use bodyparser to pull json data from our REST services
 app.use(bodyParser.json());

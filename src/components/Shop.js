@@ -1,11 +1,11 @@
 import React from 'react';
 import PopularBooks from './Books/PopularBooks';
 
-const Shop = (props) => {
+const Shop = () => {
     return(
         <div className="container">
             <div className="row">
-                <PopularBooks setLoginState={props.setLoginState} locale={props.locale}/>
+                <PopularBooks />
             </div>
         </div>
     )
