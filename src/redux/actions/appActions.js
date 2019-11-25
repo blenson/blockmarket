@@ -1,4 +1,4 @@
-import { SET_LOCALE, SET_LOGGEDINSTATUS } from "./actionTypes";
+import { SET_LOCALE, SET_LOGGEDINSTATUS } from "../actionTypes";
 
 export const setLocale = content => ({
     type: SET_LOCALE,
@@ -9,3 +9,4 @@ export const setLoggedInStatus = loggedIn => ({
     type: SET_LOGGEDINSTATUS,
     loggedIn: loggedIn
 });
+

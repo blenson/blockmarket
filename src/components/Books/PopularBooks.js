@@ -6,8 +6,9 @@ import axios from "axios";
 import BookCard from "./BookCard";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
-import { setLoginState } from "../../util/session"
-import { setLoggedInStatus } from "../../redux/actions";
+import { setLoggedInStatus } from "../../redux/actions/appActions";
+import { setProfile } from "../../redux/actions/profileActions";
+
 
 class PopularBooks extends Component {
     _isMounted = false;
@@ -62,7 +63,8 @@ class PopularBooks extends Component {
             .catch(error => {
                 console.log(error);
                 if (this._isMounted) {
-                    setLoginState(false, this.props.setLoggedInState);
+                    this.props.setLoggedInStatus(false);
+                    this.props.setProfile(null);
                     this.setState({ authorized: false });
                 }
             });
@@ -81,7 +83,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setLoggedInStatus: (status) => dispatch(setLoggedInStatus(status))
+        setLoggedInStatus: (status) => dispatch(setLoggedInStatus(status)),
+        setProfile: (user) => dispatch(setProfile(user)),
     };
 }
 

@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
 
 const MerchantModel = require("../../models/User/MerchantModel");
 
 // get all
-router.get('/', async (req, res) => {
+router.get('/', passport.authenticate("jwt", { session: false }), async (req, res) => {
     try {
         if (req.auth.admin === 0) {
             res.status(401).send("Not authorised");
@@ -17,12 +18,11 @@ router.get('/', async (req, res) => {
     }
 });
 
-// get one
-router.get('/:id', async (req, res) => {
+router.get('/:id', passport.authenticate("jwt", { session: false }), async (req, res) => {
     try {
         if (req.auth.isMerchant !== true && req.auth.admin === 0 || req.params.id !== req.auth.userid) {
-            res.status(401).send("Not authorised");
-            return;
+             res.status(401).send("Not authorised");
+             return;
         }
         var merchant = await MerchantModel.findById(req.params.id).exec();
         res.send(merchant);
@@ -43,7 +43,7 @@ router.post("/", async (req, res) => {
 });
 
 // update existing
-router.put("/:id", async (req, res) => {
+router.put("/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
     try {
         if (req.auth.isMerchant !== true && req.auth.admin === 0 || req.params.id !== req.auth.userid) {
             res.status(401).send("Not authorised");
@@ -59,7 +59,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // delete one
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
     try {
         if (req.auth.admin === 0) {
             res.status(401).send("Not authorised");

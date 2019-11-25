@@ -186,7 +186,7 @@ router.post("/login", async (req, res) => {
 
         const token = jwt.sign(payload, process.env.TOKEN_SECRET);
         res.cookie("jwt", token);
-        res.send({ code: REGCODE.SUCCESS });
+        res.send({ code: REGCODE.SUCCESS, user: authDoc.userid, merchant: authDoc.isMerchant });
     } catch (error) {
         res.status(500).send(error);
     }

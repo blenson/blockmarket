@@ -8,8 +8,8 @@ import { FormattedMessage } from "react-intl";
 import { translate } from "../i18n/util/translate";
 
 import { connect } from "react-redux";
-import { setLoginState } from "../util/session"
-import { setLocale, setLoggedInStatus } from "../redux/actions";
+import { setLocale, setLoggedInStatus } from "../redux/actions/appActions";
+import { setProfile } from "../redux/actions/profileActions";
 
 
 class Login extends Component {
@@ -37,8 +37,12 @@ class Login extends Component {
         };
 
         try {
-            await axios.post(process.env.REACT_APP_ServiceURL + "/api/auth/login", loginData, config);
-            setLoginState(true, this.props.setLoggedInStatus);
+            let logResult = await axios.post(process.env.REACT_APP_ServiceURL + "/api/auth/login", loginData, config);
+            let userPath = "/api/" + (logResult.data.merchant ? "merchants/" : "buyers/") + logResult.data.user;
+            let response = await axios.get(process.env.REACT_APP_ServiceURL + userPath , config);
+            let user = response.data;
+            this.props.setProfile(user);
+            this.props.setLoggedInStatus(true);
         } catch (error) {
             this.setState({ displayMessage: error.response.data.msg, hasError: true });
         }
@@ -110,7 +114,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         setLocale: (locale) => dispatch(setLocale(locale)),
-        setLoggedInStatus: (status) => dispatch(setLoggedInStatus(status))
+        setLoggedInStatus: (status) => dispatch(setLoggedInStatus(status)),
+        setProfile: (user) => dispatch(setProfile(user))
     }
 }
 

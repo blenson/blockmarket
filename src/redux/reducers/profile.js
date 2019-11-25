@@ -1,9 +1,19 @@
+import { SET_PROFILE } from "../actionTypes";
+
 const initialState = {
-    counter: 0
-}
+    user: null
+};
 
 const profile = (state = initialState, action) => {
-    return state;
+    switch (action.type) {
+        case SET_PROFILE:
+            return {
+                ...state,
+                user: action.user
+            };
+        default:
+            return state;
+    }
 };
 
 export default profile;

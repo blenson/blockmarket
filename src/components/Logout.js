@@ -4,8 +4,8 @@ import "materialize-css/dist/css/materialize.min.css";
 import "material-design-icons/iconfont/material-icons.css";
 
 import { connect } from "react-redux";
-import { setLoginState } from "../util/session";
-import { setLocale, setLoggedInStatus } from "../redux/actions";
+import { setLocale, setLoggedInStatus } from "../redux/actions/appActions";
+import { setProfile } from "../redux/actions/profileActions";
 
 class Logout extends Component {
     constructor(props) {
@@ -18,7 +18,8 @@ class Logout extends Component {
     logoutUser = async e => {
         // TODO - we should call the server to delete the auth cookie 
 
-        setLoginState(false, this.props.setLoggedInStatus);
+        this.props.setLoggedInStatus(false);
+        this.props.setProfile(null);
         this.setState({ authenticated: false });
     };
 
@@ -45,7 +46,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         setLocale: locale => dispatch(setLocale(locale)),
-        setLoggedInStatus: status => dispatch(setLoggedInStatus(status))
+        setLoggedInStatus: status => dispatch(setLoggedInStatus(status)),
+        setProfile: user => dispatch(setProfile(user))
     };
 };
 

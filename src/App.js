@@ -3,8 +3,8 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { IntlProvider } from "react-intl";
 import { connect } from "react-redux";
-import { setLocale, setLoggedInStatus } from "./redux/actions";
-
+import { setLocale, setLoggedInStatus } from "./redux/actions/appActions";
+import { setProfile } from "./redux/actions/profileActions";
 import locales from "./i18n/locales";
 
 import Navbar from "./components/Navbar";
@@ -15,13 +15,8 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Cart from "./components/Cart";
 
+
 class App extends Component {
-
-    componentDidMount() {
-        this.props.setLocale(localStorage.getItem("HVSLocale") == null ? "en" : localStorage.getItem("HVSLocale"));
-        this.props.setLoggedInStatus(JSON.parse(localStorage.getItem("HVSLoggedIn") || "false"));
-    }
-
     render() {
         let locale = this.props.locale;
         let messages = locales[`${locale}`];
@@ -65,7 +60,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         setLocale: (locale) => dispatch(setLocale(locale)),
-        setLoggedInStatus: (status) => dispatch(setLoggedInStatus(status))
+        setLoggedInStatus: (status) => dispatch(setLoggedInStatus(status)),
+        setProfile: (user) => dispatch(setProfile(user))
     }
 }
 

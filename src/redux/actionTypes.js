@@ -1,2 +1,9 @@
 export const SET_LOCALE = "SET_LOCALE";
 export const SET_LOGGEDINSTATUS = "SET_LOGINSTATUS";
+
+export const SET_PROFILE = "SET_PROFILE";
+
+export const ADD_TO_CART = "ADD_TO_CART";
+export const DEC_CART_ITEM_COUNT = "DEC_CART_ITEM_COUNT";
+export const INC_CART_ITEM_COUNT = "INC_CART_ITEM_COUNT";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";

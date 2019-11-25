@@ -11,7 +11,7 @@ import "react-flags-select/css/react-flags-select.css";
 import CountBadge from "./CountBadge";
 
 import { connect } from "react-redux";
-import { setLocale } from "../redux/actions";
+import { setLocale } from "../redux/actions/appActions";
 
 class Navbar extends Component {
     componentDidMount() {
@@ -26,30 +26,25 @@ class Navbar extends Component {
         this.onSelectFlag = this.onSelectFlag.bind(this);
     }
 
-    persistLocale(locale) {
-        this.props.setLocale(locale);
-        localStorage.setItem("HVSLocale", locale);
-    }
-
     onSelectFlag(countrycode) {
         switch (countrycode) {
             case "GB":
-                this.persistLocale("engb");
+                    this.props.setLocale("engb");
                 break;
             case "FR":
-                this.persistLocale("fr");
+                    this.props.setLocale("fr");
                 break;
             case "DE":
-                this.persistLocale("de");
+                    this.props.setLocale("de");
                 break;
             case "ES":
-                this.persistLocale("es");
+                    this.props.setLocale("es");
                 break;
             case "JP":
-                this.persistLocale("ja");
+                    this.props.setLocale("ja");
                 break;
             default:
-                this.persistLocale("en");
+                    this.props.setLocale("en");
                 break;
         }
     }
@@ -129,7 +124,7 @@ class Navbar extends Component {
                                 <Link to='/cart' className='btn-floating indigo darken-4 z-depth-0'>
                                     <i className='material-icons'>shopping_cart</i>
                                 </Link>
-                                <CountBadge counter='0' />
+                                <CountBadge counter={this.props.cartCount} />
                             </li>
                         </ul>
                     </div>
@@ -191,7 +186,8 @@ class Navbar extends Component {
 const mapStateToProps = state => {
     return {
         locale: state.app.locale,
-        loggedIn: state.app.loggedIn
+        loggedIn: state.app.loggedIn,
+        cartCount: state.cart.totalItems
     };
 };
 

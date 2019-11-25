@@ -29,8 +29,9 @@
 .notification-badge {
     position:relative;
     padding:3px 7px;
-    background-color: #fff;
-    color: #000;
+    background-color: #f00;
+    color: #fff;
+    font-weight: bold;
     bottom: 15px;
     left: -25px;
     border-radius: 50%;
