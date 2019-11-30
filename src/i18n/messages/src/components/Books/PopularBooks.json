@@ -2,5 +2,44 @@
   {
     "id": "books.popular",
     "defaultMessage": "Popular Books"
-  }
-]
+  },
+  {
+    "id": "books.title",
+    "defaultMessage": "Name"
+  },
+  {
+    "id": "books.author",
+    "defaultMessage": "Author"
+  },
+  {
+    "id": "books.genre",
+    "defaultMessage": "Genre"
+  },
+  {
+    "id": "books.price",
+    "defaultMessage": "Price"
+  },
+  {
+    "id": "books.shipping",
+    "defaultMessage": "Shipping"
+  },
+  {
+    "id": "books.description",
+    "defaultMessage": "Description"
+  },
+  {
+    "id": "books.stocklevel",
+    "defaultMessage": "Stock Level"
+  },
+  {
+    "id": "books.pages",
+    "defaultMessage": "Pages"
+  },
+  {
+    "id": "books.publishyear",
+    "defaultMessage": "Published Year"
+  },
+  {
+    "id": "books.publisher",
+    "defaultMessage": "Publisher"
+  }]

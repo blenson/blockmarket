@@ -1,4 +1,4 @@
-import { ADD_TO_CART, DEC_CART_ITEM_COUNT, INC_CART_ITEM_COUNT, REMOVE_FROM_CART } from "../actionTypes";
+import { ADD_TO_CART, DEC_CART_ITEM_COUNT, INC_CART_ITEM_COUNT, REMOVE_FROM_CART, CLEAR_CART } from "../actionTypes";
 
 export const addToCart = item => ({
     type: ADD_TO_CART,
@@ -18,4 +18,8 @@ export const decCartItemCount = itemid => ({
 export const incCartItemCount = itemid => ({
     type: INC_CART_ITEM_COUNT,
     id: itemid
+});
+
+export const clearCart = () => ({
+    type: CLEAR_CART
 });

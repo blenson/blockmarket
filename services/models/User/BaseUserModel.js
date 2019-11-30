@@ -5,7 +5,6 @@ const BaseUserSchema = new mongoose.Schema({
     "firstName" : String,
     "lastName" : String,
     "address" : {
-        "postOfficeBox" : String,
         "street1" : String,
         "street2" : String,
         "locality" : String,    // e.g. city

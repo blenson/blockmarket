@@ -1,36 +1,28 @@
 import React from "react";
-import { FormattedNumber } from "react-intl";
 import "materialize-css/dist/css/materialize.min.css";
 import "material-design-icons/iconfont/material-icons.css";
 import StarRatings from "react-star-ratings";
 import { CollectionItem, Icon, Row, Col } from "react-materialize";
 
-import { useSelector, useDispatch } from "react-redux";
-import { addToCart, decCartItemCount, incCartItemCount } from "../../redux/actions/cartActions";
-
-let cultureInfo = require("../../i18n/util/cultures.json");
+import { useDispatch } from "react-redux";
+import { decCartItemCount, incCartItemCount } from "../../redux/actions/cartActions";
+import FormattedCurrency from "../Misc/FormattedCurrency";
 
 const CartCard = props => {
-    const locale = useSelector(state => state.app.locale);
     const dispatch = useDispatch();
-
-    const truncate = (input, len) => (input.length > len ? `${input.substring(0, len)}...` : input);
 
     let item = props.item;
     if (item === null) {
         return null;
     }
 
-    //!TODO - DEMO ONLY = Remove the next line after real currency conversions are implemented
-    let currencyFactor = locale === "ja" ? 100 : 1;
-
     return (
-        <CollectionItem className='avatar'>
+        <CollectionItem>
             <Row>
-                <Col s={12} m={3} l={2}>
+                <Col s={12} m={3} l={3}>
                     <img src={item.image.largeUrl} alt='' height='120' />
                 </Col>
-                <Col s={12} m={6} l={8}>
+                <Col s={12} m={4} l={4}>
                     <div className='title'>
                         <b>{item.name}</b>
                     </div>
@@ -38,16 +30,13 @@ const CartCard = props => {
                     <div>{item.genre}</div>
                     <StarRatings rating={item.rating / 10} starRatedColor='blue' starDimension='15px' starSpacing='3px' />
                     <span style={{ marginLeft: 10 }}>({item.numRatings})</span>
+                    <div></div>
 
                     <p>
-                        <FormattedNumber
-                            value={parseFloat(item.price.$numberDecimal).toFixed(2) * currencyFactor}
-                            style={`currency`}
-                            currency={cultureInfo[locale].currency}
-                        />
+                        <FormattedCurrency amount={item.price} />
                     </p>
                 </Col>
-                <Col s={12} m={3} l={2}>
+                <Col s={12} m={3} l={3}>
                     <h5>
                         <span
                             className='btn-floating btn-small waves-effect waves-light indigo'
@@ -68,13 +57,9 @@ const CartCard = props => {
                         </span>
                     </h5>
                 </Col>
-                <Col s={2}>
+                <Col s={12} m={2} l={2}>
                     <h5>
-                        <FormattedNumber
-                            value={parseFloat(item.price.$numberDecimal).toFixed(2) * currencyFactor * props.count}
-                            style={`currency`}
-                            currency={cultureInfo[locale].currency}
-                        />
+                        <FormattedCurrency amount={parseFloat(item.price.$numberDecimal) * props.count} />
                     </h5>
                 </Col>
             </Row>

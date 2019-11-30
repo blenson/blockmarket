@@ -16,6 +16,7 @@ const buyers = require("./routes/userRoutes/buyerRoute");
 const stores = require("./routes/storeRoutes/storeRoute");
 const orders = require("./routes/purchaseRoutes/orderRoute");
 const auth = require("./routes/authRoutes/authRoute");
+const payments = require("./routes/paymentRoutes/paymentRoute");
 
 dotenv.config();
 
@@ -54,6 +55,7 @@ app.use("/api/buyers", buyers);
 app.use("/api/stores", passport.authenticate("jwt", { session: false }), stores);
 app.use("/api/orders", passport.authenticate("jwt", { session: false }), orders);
 app.use("/api/auth", auth);
+app.use("/api/payment", payments);
 
 const httpsOptions = {
     key: fs.readFileSync("key.pem"),

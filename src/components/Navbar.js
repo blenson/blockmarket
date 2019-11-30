@@ -8,10 +8,11 @@ import "material-design-icons/iconfont/material-icons.css";
 
 import ReactFlagsSelect from "react-flags-select";
 import "react-flags-select/css/react-flags-select.css";
-import CountBadge from "./CountBadge";
+import CountBadge from "./Misc/CountBadge";
 
 import { connect } from "react-redux";
-import { setLocale } from "../redux/actions/appActions";
+import { setLocale, setLoggedInStatus } from "../redux/actions/appActions";
+import { setProfile } from "../redux/actions/profileActions";
 
 class Navbar extends Component {
     componentDidMount() {
@@ -29,22 +30,22 @@ class Navbar extends Component {
     onSelectFlag(countrycode) {
         switch (countrycode) {
             case "GB":
-                    this.props.setLocale("engb");
+                this.props.setLocale("engb");
                 break;
             case "FR":
-                    this.props.setLocale("fr");
+                this.props.setLocale("fr");
                 break;
             case "DE":
-                    this.props.setLocale("de");
+                this.props.setLocale("de");
                 break;
             case "ES":
-                    this.props.setLocale("es");
+                this.props.setLocale("es");
                 break;
             case "JP":
-                    this.props.setLocale("ja");
+                this.props.setLocale("ja");
                 break;
             default:
-                    this.props.setLocale("en");
+                this.props.setLocale("en");
                 break;
         }
     }
@@ -95,16 +96,27 @@ class Navbar extends Component {
                                     <FormattedMessage id='nav.Shop' defaultMessage='Shop' />
                                 </NavLink>
                             </li>
-                            <li>
-                                <NavLink activeClassName='selectedLink' to='/store' className='hide-on-med-and-down'>
-                                    <FormattedMessage id='nav.Store' defaultMessage='Store' />
-                                </NavLink>
-                            </li>
                             {isLoggedIn ? (
                                 <li>
-                                    <NavLink activeClassName='selectedLink' to='/logout' className='hide-on-med-and-down'>
-                                        <FormattedMessage id='nav.Logout' defaultMessage='Logout' />
+                                    <NavLink activeClassName='selectedLink' to='/store' className='hide-on-med-and-down'>
+                                        <FormattedMessage id='nav.Store' defaultMessage='Store' />
                                     </NavLink>
+                                </li>
+                            ) : (
+                                ""
+                            )}
+                            {isLoggedIn ? (
+                                <li>
+                                    <Link
+                                        className='hide-on-med-and-down'
+                                        to='/'
+                                        onClick={e => {
+                                            this.props.setLoggedInStatus(false);
+                                            this.props.setProfile(null);
+                                        }}
+                                    >
+                                        <FormattedMessage id='nav.Logout' defaultMessage='Logout' />
+                                    </Link>
                                 </li>
                             ) : (
                                 <Fragment>
@@ -120,12 +132,21 @@ class Navbar extends Component {
                                     </li>
                                 </Fragment>
                             )}
+                            {isLoggedIn ? (
                             <li>
-                                <Link to='/cart' className='btn-floating indigo darken-4 z-depth-0'>
-                                    <i className='material-icons'>shopping_cart</i>
+                                <Link to='/profile' className='btn-floating indigo darken-4 z-depth-0'>
+                                    <i className='material-icons'>person</i>
                                 </Link>
-                                <CountBadge counter={this.props.cartCount} />
                             </li>
+                            ) : (
+                                ""
+                            )}
+                                <li>
+                                    <Link to='/cart' className='btn-floating indigo darken-4 z-depth-0'>
+                                        <i className='material-icons'>shopping_cart</i>
+                                    </Link>
+                                    <CountBadge counter={this.props.cartCount} />
+                                </li>
                         </ul>
                     </div>
                 </nav>
@@ -147,22 +168,24 @@ class Navbar extends Component {
                         this.Sidenav = Sidenav;
                     }}
                 >
-                    <li>
-                        <Link to='/'>
-                            <FormattedMessage id='nav.Shop' defaultMessage='Shop' />
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to='/store'>
-                            <FormattedMessage id='nav.Store' defaultMessage='Store' />
-                        </Link>
-                    </li>
                     {isLoggedIn ? (
-                        <li>
-                            <Link to='/logout' className='modal-trigger'>
-                                <FormattedMessage id='nav.Logout' defaultMessage='Logout' />
-                            </Link>
-                        </li>
+                        <Fragment>
+                            <li>
+                                <Link to='/'>
+                                    <FormattedMessage id='nav.Shop' defaultMessage='Shop' />
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to='/store'>
+                                    <FormattedMessage id='nav.Store' defaultMessage='Store' />
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to='/logout' className='modal-trigger'>
+                                    <FormattedMessage id='nav.Logout' defaultMessage='Logout' />
+                                </Link>
+                            </li>
+                        </Fragment>
                     ) : (
                         <Fragment>
                             <li>
@@ -193,8 +216,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setLocale: (locale) => dispatch(setLocale(locale))
-    }
-}
+        setLocale: locale => dispatch(setLocale(locale)),
+        setLoggedInStatus: status => dispatch(setLoggedInStatus(status)),
+        setProfile: user => dispatch(setProfile(user))
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

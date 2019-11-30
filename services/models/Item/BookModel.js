@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const BaseItemModel = require("./BaseItemModel");
+const DEMODATA = require("../constants");
+
 
 // Derived book model
 const BookModel = BaseItemModel.discriminator(
@@ -22,6 +24,9 @@ const BookModel = BaseItemModel.discriminator(
 
 const dummyBookData = [
     {
+        merchantId: DEMODATA.MERCHANT_ID,
+        merchantCountry: DEMODATA.MERCHANT_COUNTRY,
+        storeId: DEMODATA.STORE_ID,
         name: "1984",
         author: "Blair, Eric Arthur (George Orwell)",
         image: {
@@ -36,9 +41,14 @@ const dummyBookData = [
         publisher: "S. J. Reginald Saunders & Co. Ltd.",
         rating: 45,
         numRatings: 12,
-        price: 12.4
+        stock: 10,
+        price: 12.4,
+        shipping: 8
     },
     {
+        merchantId: DEMODATA.MERCHANT_ID,
+        merchantCountry: DEMODATA.MERCHANT_COUNTRY,
+        storeId: DEMODATA.STORE_ID,
         name: "The Great Gatsby",
         author: "Fitzgerald, F. Scott (Francis Scott Key)",
         image: {
@@ -53,9 +63,14 @@ const dummyBookData = [
         publisher: "",
         rating: 37,
         numRatings: 15,
-        price: 34.95
+        stock: 10,
+        price: 34.95,
+        shipping: 8
     },
     {
+        merchantId: DEMODATA.MERCHANT_ID,
+        merchantCountry: DEMODATA.MERCHANT_COUNTRY,
+        storeId: DEMODATA.STORE_ID,
         name: "Ulysses",
         author: "Joyce, James",
         image: {
@@ -70,9 +85,14 @@ const dummyBookData = [
         publisher: "The Bodley Head",
         rating: 49,
         numRatings: 181,
-        price: 17.79
+        stock: 10,
+        price: 17.79,
+        shipping: 9
     },
     {
+        merchantId: DEMODATA.MERCHANT_ID,
+        merchantCountry: DEMODATA.MERCHANT_COUNTRY,
+        storeId: DEMODATA.STORE_ID,
         name: "Brave New World",
         author: "Huxley, Aldous Leonard",
         image: {
@@ -87,9 +107,14 @@ const dummyBookData = [
         publisher: "Chatto & Windus",
         rating: 42,
         numRatings: 165,
-        price: 42.99
+        stock: 10,
+        price: 42.99,
+        shipping: 8
     },
     {
+        merchantId: DEMODATA.MERCHANT_ID,
+        merchantCountry: DEMODATA.MERCHANT_COUNTRY,
+        storeId: DEMODATA.STORE_ID,
         name: "The Bell Jar",
         author: "Plath, Sylvia",
         image: {
@@ -104,9 +129,14 @@ const dummyBookData = [
         publisher: "Faber and Faber",
         rating: 32,
         numRatings: 17,
-        price: 45.9
+        stock: 10,
+        price: 45.9,
+        shipping: 8
     },
     {
+        merchantId: DEMODATA.MERCHANT_ID,
+        merchantCountry: DEMODATA.MERCHANT_COUNTRY,
+        storeId: DEMODATA.STORE_ID,
         name: "The Sojourner",
         author: "Rawlings, Marjorie Kinnan",
         image: {
@@ -121,9 +151,14 @@ const dummyBookData = [
         publisher: "Charles Scribner's Sons",
         rating: 27,
         numRatings: 6,
-        price: 12.95
+        stock: 10,
+        price: 12.95,
+        shipping: 9
     },
     {
+        merchantId: DEMODATA.MERCHANT_ID,
+        merchantCountry: DEMODATA.MERCHANT_COUNTRY,
+        storeId: DEMODATA.STORE_ID,
         name: "Peyton Place",
         author: "Metalious, Grace",
         image: {
@@ -138,9 +173,14 @@ const dummyBookData = [
         publisher: "Julian Messner, Inc.",
         rating: 29,
         numRatings: 9,
-        price: 26.95
+        stock: 10,
+        price: 26.95,
+        shipping: 10
     },
     {
+        merchantId: DEMODATA.MERCHANT_ID,
+        merchantCountry: DEMODATA.MERCHANT_COUNTRY,
+        storeId: DEMODATA.STORE_ID,
         name: "The Crime at Black Dudley",
         author: "Allingham, Margery",
         image: {
@@ -155,9 +195,14 @@ const dummyBookData = [
         publisher: "William Heinemann Ltd",
         rating: 19,
         numRatings: 3,
-        price: 16.95
+        stock: 10,
+        price: 16.95,
+        shipping: 9
     },
     {
+        merchantId: DEMODATA.MERCHANT_ID,
+        merchantCountry: DEMODATA.MERCHANT_COUNTRY,
+        storeId: DEMODATA.STORE_ID,
         name: "Who Killed the Husband?",
         author: "Footner, Hulbert",
         image: {
@@ -172,7 +217,9 @@ const dummyBookData = [
         publisher: "Harper & Brothers Publishers",
         rating: 40,
         numRatings: 11,
-        price: 43.0
+        stock: 10,
+        price: 43.0,
+        shipping: 9
     }
 ];
 
@@ -180,13 +227,21 @@ BookModel.countDocuments({}, function(err, c) {
     if (c == 0) {
         dummyBookData.map(item => {
             var bookInstance = new BookModel({
+                merchantId: item.merchantId,
+                merchantCountry: item.merchantCountry,
+                storeId: item.storeId,
                 name: item.name,
                 author: item.author,
                 image: item.image,
                 genre: item.genre,
                 desc: item.desc,
                 price: item.price,
+                shipping: item.shipping,
                 rating: item.rating,
+                stock: item.stock,
+                pages: item.pages,
+                publishYear: item.publishYear,
+                publisher: item.publisher,
                 numRatings: item.numRatings
             });
             bookInstance.save(function(err, item) {

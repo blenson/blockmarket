@@ -14,6 +14,9 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Cart from "./components/Cart";
+import Checkout from "./components/OrderSummary";
+import Profile from "./components/Profile";
+import InventoryDetails from "./components/Store/InvDetails";
 
 
 class App extends Component {
@@ -43,6 +46,15 @@ class App extends Component {
                         </Route>
                         <Route path='/cart'>
                             <Cart />
+                        </Route>
+                        <Route path='/checkout'>
+                            <Checkout />
+                        </Route>
+                        <Route path='/invdetails'>
+                            <InventoryDetails />
+                        </Route>
+                        <Route path='/profile'>
+                            <Profile />
                         </Route>
                     </Switch>
                 </Router>

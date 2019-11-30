@@ -1,0 +1,77 @@
+[
+  {
+    "id": "store.title",
+    "defaultMessage": "Store Management"
+  },
+  {
+    "id": "store.details",
+    "defaultMessage": "Details"
+  },
+  {
+    "id": "store.inventory",
+    "defaultMessage": "Inventory"
+  },
+  {
+    "id": "store.orders",
+    "defaultMessage": "Orders"
+  },
+  {
+    "id": "store.bookname",
+    "defaultMessage": "Name:"
+  },
+  {
+    "id": "store.author",
+    "defaultMessage": "Author:"
+  },
+  {
+    "id": "store.genre",
+    "defaultMessage": "Genre:"
+  },
+  {
+    "id": "store.stock",
+    "defaultMessage": "Stock:"
+  },
+  {
+    "id": "store.price",
+    "defaultMessage": "Price:"
+  },
+  {
+    "id": "store.shipping",
+    "defaultMessage": "Shipping"
+  },
+  {
+    "id": "store.orderid",
+    "defaultMessage": "Order ID:"
+  },
+  {
+    "id": "store.orderdate",
+    "defaultMessage": "Order Date:"
+  },
+  {
+    "id": "store.status",
+    "defaultMessage": "Status:"
+  },
+  {
+    "id": "store.status.paid",
+    "defaultMessage": "PAID"
+  },
+  {
+    "id": "store.status.shipped",
+    "defaultMessage": "SHIPPED"
+  },
+  {
+    "id": "store.status.packaging",
+    "defaultMessage": "PACKAGING"
+  },
+  {
+    "id": "store.status.delivered",
+    "defaultMessage": "DELIVERED"
+  },
+  {
+    "id": "store.buyer",
+    "defaultMessage": "Buyer:"
+  },
+  {
+    "id": "store.address",
+    "defaultMessage": "Address:"
+  }]

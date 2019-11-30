@@ -5,12 +5,23 @@ const BasePurchaseModel = require("./BasePurchaseModel");
 const OrderModel = BasePurchaseModel.discriminator('Order', 
     new mongoose.Schema({
         "paymentMethod" : String,
+        "orderSubTotal" : Number,
         "shippingCost" : Number,
         "platformCharge" : String,
         "tax1" : Number,
         "tax2" : Number,
         "orderTotal" : Number,
         "shippingMethod" : String,
+        "status" : String,
+        "details" : [
+            {
+                "itemid": String,
+                "name": String,
+                "quantity": Number,
+                "unitprice": Number,
+                "shipping": Number
+            }
+        ],
         "trackingNumber" : String,
         "trackingUrl" : String,
         "transaction" : [{
@@ -20,6 +31,5 @@ const OrderModel = BasePurchaseModel.discriminator('Order',
             "statusDate" : String
         }]
     }));
-
 
 module.exports = OrderModel

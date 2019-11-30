@@ -1,16 +1,13 @@
 import React from "react";
-import { FormattedNumber } from "react-intl";
 import "materialize-css/dist/css/materialize.min.css";
 import "material-design-icons/iconfont/material-icons.css";
 import StarRatings from "react-star-ratings";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/actions/cartActions";
-
-let cultureInfo = require("../../i18n/util/cultures.json");
+import FormattedCurrency from "../Misc/FormattedCurrency";
 
 const BookCard = props => {
-    const locale = useSelector(state => state.app.locale);
     const dispatch = useDispatch();
 
     const truncate = (input, len) => (input.length > len ? `${input.substring(0, len)}...` : input);
@@ -19,9 +16,6 @@ const BookCard = props => {
     if (item == null) {
         return null;
     }
-
-    //!TODO - DEMO ONLY = Remove the next line after real currency conversions are implemented
-    let currencyFactor = locale === "ja" ? 100 : 1;
 
     return (
         <div className='card'>
@@ -46,11 +40,7 @@ const BookCard = props => {
                         <i className='material-icons'>add</i>
                     </span>
                     <b>
-                        <FormattedNumber
-                            value={parseFloat(item.price.$numberDecimal).toFixed(2) * currencyFactor}
-                            style={`currency`}
-                            currency={cultureInfo[locale].currency}
-                        />
+                        <FormattedCurrency amount={item.price} />
                     </b>
                 </p>
             </div>

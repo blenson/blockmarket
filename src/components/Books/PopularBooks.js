@@ -9,7 +9,6 @@ import { connect } from "react-redux";
 import { setLoggedInStatus } from "../../redux/actions/appActions";
 import { setProfile } from "../../redux/actions/profileActions";
 
-
 class PopularBooks extends Component {
     _isMounted = false;
 
@@ -83,9 +82,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setLoggedInStatus: (status) => dispatch(setLoggedInStatus(status)),
-        setProfile: (user) => dispatch(setProfile(user)),
+        setLoggedInStatus: status => dispatch(setLoggedInStatus(status)),
+        setProfile: user => dispatch(setProfile(user))
     };
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(PopularBooks);

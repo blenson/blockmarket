@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const ObjectID = require('mongodb').ObjectID;
+
 
 const OrderModel = require("../../models/Purchase/OrderModel");
 
@@ -16,6 +18,15 @@ router.get("/", async (req, res) => {
             var orders = await OrderModel.find({ buyerId: req.auth.userid }).exec();
             res.send(orders);
         }
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+// get next order id
+router.get("/nextorderid", async (req, res) => {
+    try {
+        res.send(ObjectID());
     } catch (error) {
         res.status(500).send(error);
     }

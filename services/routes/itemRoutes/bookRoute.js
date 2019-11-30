@@ -17,6 +17,21 @@ router.get("/limit/:num", async (req, res) => {
     }
 });
 
+// get merchant's books
+router.get("/mine", passport.authenticate("jwt", { session: false }), async (req, res) => {
+    try {
+        if (req.auth.isMerchant !== true) {
+            res.status(401).send("Not authorised");
+        }
+        var books = await BookModel.find({ merchantId: req.auth.userid })
+            .sort({ name: 1 })
+            .exec();
+        res.send(books);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
 // Return the number of documents in the collection.
 // We may want to change the countDocuments to estimatedCount later
 // if the number of books becmoes huge and performance takes a hit.

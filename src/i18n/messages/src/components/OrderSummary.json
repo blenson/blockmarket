@@ -1,0 +1,75 @@
+[
+  {
+    "id": "orderSummary.title",
+    "defaultMessage": "Order Summary"
+  },
+  {
+    "id": "orderSummary.shipTo",
+    "defaultMessage": "Ship To:"
+  }
+  ,
+  {
+    "id": "orderSummary.name",
+    "defaultMessage": "Name:"
+  },
+  {
+    "id": "orderSummary.street",
+    "defaultMessage": "Street:"
+  },
+  {
+    "id": "orderSummary.city",
+    "defaultMessage": "City:"
+  },
+  {
+    "id": "orderSummary.country",
+    "defaultMessage": "Country:"
+  },
+  {
+    "id": "orderSummary.postCode",
+    "defaultMessage": "Postal Code:"
+  },
+  {
+    "id": "orderSummary.region",
+    "defaultMessage": "County:"
+  },
+  {
+    "id": "orderSummary.subtotal",
+    "defaultMessage": "Subtotal:"
+  },
+  {
+    "id": "orderSummary.shipping",
+    "defaultMessage": "Shipping:"
+  },
+  {
+    "id": "orderSummary.tax",
+    "defaultMessage": "Tax:"
+  },
+  {
+    "id": "orderSummary.total",
+    "defaultMessage": "Total"
+  },
+  {
+    "id": "orderSummary.itemName",
+    "defaultMessage": "Item"
+  },
+  {
+    "id": "orderSummary.itemPrice",
+    "defaultMessage": "Item Price"
+  },
+  {
+    "id": "orderSummary.ship",
+    "defaultMessage": "Shipping"
+  },
+  {
+    "id": "orderSummary.quantity",
+    "defaultMessage": "Quantity"
+  },
+  {
+    "id": "orderSummary.itemTotal",
+    "defaultMessage": "Item Total"
+  },
+  {
+    "id": "orderSummary.problemWithCard",
+    "defaultMessage": "Error processing credit card. Please try again."
+  }
+]

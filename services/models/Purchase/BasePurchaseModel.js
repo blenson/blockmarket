@@ -10,11 +10,18 @@ const BasePurchaseSchema = new mongoose.Schema({
     "itemId" : String,
     "itemName" : String,
     "orderDate" : Date,
-    "quantity" : Number,
-    "units" : String,
-    "price" : Number,
-    "currency" : String
+    "currency" : String,
+    "shipTo": {
+        "postOfficeBox": String,
+        "street1": String,
+        "street2": String,
+        "locality": String,
+        "region": String,
+        "country": String,
+        "postCode": String
+    }
 });
 const BasePurchaseModel = mongoose.model( "BasePurchase", BasePurchaseSchema, "purchases" );
 
 module.exports = BasePurchaseModel
+

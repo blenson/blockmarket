@@ -1,4 +1,4 @@
-import { ADD_TO_CART, DEC_CART_ITEM_COUNT, INC_CART_ITEM_COUNT, REMOVE_FROM_CART } from "../actionTypes";
+import { ADD_TO_CART, DEC_CART_ITEM_COUNT, INC_CART_ITEM_COUNT, REMOVE_FROM_CART, CLEAR_CART } from "../actionTypes";
 
 const initialState = {
     allIds: [],
@@ -50,13 +50,20 @@ const cart = (state = initialState, action) => {
             return {
                 ...state,
                 totalItems: state.totalItems - iditem.count,
-                totalPrice: state.totalPrice - (iditem.count * parseFloat(iditem.data.price.$numberDecimal)),
+                totalPrice: state.totalPrice - iditem.count * parseFloat(iditem.data.price.$numberDecimal),
                 allIds: state.allIds.filter(el => {
-                    return el != action.id;
+                    return el !== action.id;
                 }),
                 items: state.items.filter(el => {
-                    return state.items[el] != action.id;
+                    return state.items[el] !== action.id;
                 })
+            };
+        case CLEAR_CART:
+            return {
+                allIds: [],
+                items: {},
+                totalItems: 0,
+                totalPrice: 0
             };
         default:
             return state;
